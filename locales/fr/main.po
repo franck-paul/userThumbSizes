@@ -1,0 +1,32 @@
+msgid "User defined thumbnails"
+msgstr "Miniatures supplémentaires"
+
+msgid "Add user defined thumbnails"
+msgstr "Ajoute des tailles de miniatures supplémentaires"
+
+msgid "Activation"
+msgstr "Activation"
+
+msgid "Active:"
+msgstr "Activé :"
+
+msgid "Thumbnails sizes"
+msgstr "Tailles supplémentaires de miniature"
+
+msgid "Code"
+msgstr "Code"
+
+msgid "Size in pixels"
+msgstr "Taille en pixels"
+
+msgid "Label"
+msgstr "Libellé"
+
+msgid "Clear any field in row to delete this row"
+msgstr "Videz n'importe quel champs d'une ligne pour supprimer la ligne"
+
+msgid "Code must not be one of these: %s"
+msgstr "Le code ne doit pas être un de ceux-ci : %s"
+
+msgid "Save"
+msgstr "Enregistrer"

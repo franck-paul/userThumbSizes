@@ -28,19 +28,13 @@ class behaviorUserThumbSizes
 				if (is_array($sizes)) {
 					foreach ($sizes as $code => $size) {
 						if (!array_key_exists($code,$media->thumb_sizes)) {
-							if (isset($size[1]) && ($size[1] > 0)) {
-								// [0] = largest size in pixels
-								// [1] = label
-								$media->thumb_sizes[$code] = array($size[0],'ratio',__($size[1]));
-								$touch = true;
-							}
+							// [0] = largest size in pixels
+							// [1] = label
+							$media->thumb_sizes[$code] = array($size[0],'ratio',__($size[1]));
+							$touch = true;
 						}
 					}
 				}
-			} else {
-				// For my own purpose until admin part is ok
-				$media->thumb_sizes['u'] = array(600,'ratio',__('large'));
-				$touch = true;
 			}
 			if ($touch) {
 				// Sort thumb_sizes DESC on largest sizes
