@@ -65,7 +65,7 @@ if (!empty($_POST))
 echo '<h2>'.html::escapeHTML($core->blog->name).' &rsaquo; '.__('User defined thumbnails').'</h2>';
 
 if (!empty($_GET['upd'])) {
-	echo '<p class="message">'.__('Setting have been successfully updated.').'</p>';
+	echo '<p class="message">'.__('Settings have been successfully updated.').'</p>';
 }
 
 echo

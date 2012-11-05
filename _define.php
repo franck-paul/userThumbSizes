@@ -12,8 +12,8 @@
 if (!defined('DC_RC_PATH')) { return; }
 
 $this->registerModule(
-	/* Name */			"User defined thumbnails",
-	/* Description*/		"Add user defined thumbnails",
+	/* Name */				__("User defined thumbnails"),
+	/* Description*/		__("Add user defined thumbnails"),
 	/* Author */			"Franck Paul",
 	/* Version */			'0.1'
 );
