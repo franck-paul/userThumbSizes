@@ -71,8 +71,8 @@ if (!empty($_GET['upd'])) {
 echo
 '<form action="'.$p_url.'" method="post">'.
 '<fieldset><legend>'.__('Activation').'</legend>'.
-'<p class="field"><label for="uts_active">'.__('Active:').' '.
-form::checkbox('uts_active',1,$uts_active).'</label>'.'</p>'.
+'<p class="field"><label for="uts_active">'.__('Active:').'</label> '.
+form::checkbox('uts_active',1,$uts_active).'</p>'.
 '</fieldset>';
 
 echo
