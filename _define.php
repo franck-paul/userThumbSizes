@@ -15,6 +15,7 @@ $this->registerModule(
 	/* Name */			"User defined thumbnails",
 	/* Description*/		"Add user defined thumbnails",
 	/* Author */			"Franck Paul",
-	/* Version */			'0.1'
+	/* Version */			'0.1',
+	/* Permissions */		'usage,contentadmin'
 );
 ?>
