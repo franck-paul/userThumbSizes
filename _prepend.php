@@ -11,7 +11,8 @@
 # -- END LICENSE BLOCK -----------------------------------------
 if (!defined('DC_RC_PATH')) { return; }
 
-$core->addBehavior('coreMediaConstruct',array('behaviorUserThumbSizes','coreMediaConstruct'));
+
+$GLOBALS['core']->addBehavior('coreMediaConstruct',array('behaviorUserThumbSizes','coreMediaConstruct'));
 
 class behaviorUserThumbSizes
 {
