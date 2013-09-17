@@ -37,15 +37,15 @@ if (!empty($_POST))
 				}
 			}
 		}
-		
+
 		# Everything's fine, save options
 		$core->blog->settings->addNamespace('userthumbsizes');
 		$core->blog->settings->userthumbsizes->put('active',$uts_active);
 		$core->blog->settings->userthumbsizes->put('sizes',(count($uts_sizes) ? serialize($uts_sizes) : ''));
-		
+
 		//$core->emptyTemplatesCache();
 		$core->blog->triggerBlog();
-		
+
 		http::redirect($p_url.'&upd=1');
 	}
 	catch (Exception $e)
@@ -62,46 +62,50 @@ if (!empty($_POST))
 
 <body>
 <?php
-echo '<h2>'.html::escapeHTML($core->blog->name).' &rsaquo; <span class="page-title">'.__('User defined thumbnails').'</span></h2>';
+echo dcPage::breadcrumb(
+	array(
+		html::escapeHTML($core->blog->name) => '',
+		'<span class="page-title">'.__('User defined thumbnails').'</span>' => ''
+	));
 
 if (!empty($_GET['upd'])) {
-	dcPage::message(__('Settings have been successfully updated.'));
+	dcPage::success(__('Settings have been successfully updated.'));
 }
 
 echo
 '<form action="'.$p_url.'" method="post">'.
-'<fieldset><legend>'.__('Activation').'</legend>'.
-'<p class="field"><label for="uts_active">'.__('Active:').'</label> '.
-form::checkbox('uts_active',1,$uts_active).'</p>'.
-'</fieldset>';
+'<p>'.form::checkbox('uts_active',1,$uts_active).' '.
+'<label for="uts_active" class="classic">'.__('Activate user defined thumbnails for this blog').'</label></p>';
 
 echo
-'<fieldset><legend>'.__('Thumbnails sizes').'</legend>';
-
-echo '<table>';
-echo '<thead><tr><th scope="col">'.__('Code').'</th>'.
+'<table>'.'<caption class="as_h3">'.__('Thumbnails sizes').'</caption>'.
+'<thead><tr>'.
+	'<th scope="col">'.__('Code').'</th>'.
 	'<th scope="col">'.__('Size in pixels').'</th>'.
-	'<th scope="col">'.__('Label').'</th></thead>';
-echo '<tbody>';
+	'<th scope="col">'.__('Label').'</th>'.
+'</tr></thead>'.
+'<tbody>';
+
 foreach ($uts_sizes as $code => $size) {
 	echo '<tr>'.
-		'<td scope="row">'.form::field(array('uts_codes[]'),1,1,$code).'</td>'.
-		'<td>'.form::field(array('uts_sizes[]'),3,3,$size[0]).'</td>'.
-		'<td>'.form::field(array('uts_labels[]'),30,255,$size[1]).'</td>'.
+			'<td scope="row">'.form::field(array('uts_codes[]'),1,1,$code).'</td>'.
+			'<td>'.form::field(array('uts_sizes[]'),3,3,$size[0]).'</td>'.
+			'<td>'.form::field(array('uts_labels[]'),30,255,$size[1]).'</td>'.
 		'</tr>';
 }
 // Empty row in order to add new thumbnail size
-echo '<tr>'.
+echo
+'<tr>'.
 	'<td scope="row">'.form::field(array('uts_codes[]'),1,1,'').'</td>'.
 	'<td>'.form::field(array('uts_sizes[]'),3,3,'').'</td>'.
 	'<td>'.form::field(array('uts_labels[]'),30,255,'').'</td>'.
-	'</tr>';
-echo '</tbody></table>';
+'</tr>'.
+'</tbody></table>';
 
-echo 
+echo
 '<p class="form-note">'.__('Clear any field in row to delete this row').'</p>'.
 '<p class="form-note">'.sprintf(__('Code must not be one of these: %s'),implode(', ',$excluded_codes)).'</p>'.
-'</fieldset>'.
+
 '<p>'.$core->formNonce().'<input type="submit" value="'.__('Save').'" /></p>'.
 '</form>';
 

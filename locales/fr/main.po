@@ -21,8 +21,8 @@ msgstr "Ajoute des tailles de miniatures supplémentaires"
 msgid "Activation"
 msgstr "Activation"
 
-msgid "Active:"
-msgstr "Activé :"
+msgid "Activate user defined thumbnails for this blog"
+msgstr "Activer les tailles de miniatures supplémentaires pour ce blog"
 
 msgid "Thumbnails sizes"
 msgstr "Tailles supplémentaires de miniature"
@@ -33,15 +33,5 @@ msgstr "Taille en pixels"
 msgid "Clear any field in row to delete this row"
 msgstr "Videz n'importe quel champs d'une ligne pour supprimer la ligne"
 
-#, php-format
 msgid "Code must not be one of these: %s"
 msgstr "Le code ne doit pas être un de ceux-ci : %s"
-
-#~ msgid "Code"
-#~ msgstr "Code"
-
-#~ msgid "Label"
-#~ msgstr "Libellé"
-
-#~ msgid "Save"
-#~ msgstr "Enregistrer"

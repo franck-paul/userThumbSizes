@@ -26,7 +26,7 @@ try
 	$core->blog->settings->userthumbsizes->put('sizes','','string','Sizes',false,true);
 
 	$core->setVersion('userThumbSizes',$new_version);
-	
+
 	return true;
 }
 catch (Exception $e)

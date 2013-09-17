@@ -19,7 +19,7 @@ class behaviorUserThumbSizes
 	public static function coreMediaConstruct($media)
 	{
 		global $core;
-		
+
 		$touch = false;
 		$core->blog->settings->addNamespace('userthumbsizes');
 		if ($core->blog->settings->userthumbsizes->active) {
@@ -39,7 +39,6 @@ class behaviorUserThumbSizes
 			}
 			if ($touch) {
 				// Sort thumb_sizes DESC on largest sizes
-				// Keeping in mind that DC build thumbnails from his first larger (or from original for the largest)
 				$sizes = array();
 				foreach ($media->thumb_sizes as $code => $size) {
 					$sizes[$code] = $size[0];
