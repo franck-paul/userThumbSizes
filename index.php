@@ -1,14 +1,18 @@
 <?php
 # -- BEGIN LICENSE BLOCK ----------------------------------
+# This file is part of userThumbSizes, a plugin for Dotclear 2.
 #
-# This file is part of Dotclear 2.
+# Copyright (c) Franck Paul and contributors
+# carnet.franck.paul@gmail.com
 #
-# Copyright (c) 2003-2008 Olivier Meunier and contributors
+# Icon from Faenza set by tiheum (http://tiheum.deviantart.com/art/Faenza-Icons-173323228)
+#
 # Licensed under the GPL version 2.0 license.
-# See LICENSE file or
+# A copy of this license is available in LICENSE file or at
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-#
 # -- END LICENSE BLOCK ------------------------------------
+
+if (!defined('DC_CONTEXT_ADMIN')) { return; }
 
 $core->blog->settings->addNamespace('userthumbsizes');
 $uts_active = (boolean) $core->blog->settings->userthumbsizes->active;
