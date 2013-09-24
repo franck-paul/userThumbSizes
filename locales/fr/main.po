@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 userThumbSizes module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-19 07:52+0200\n"
+"POT-Creation-Date: 2013-09-24 13:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Franck Paul <carnet.franck.paul@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,11 +13,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.5.7\n"
 
-msgid "User defined thumbnails"
-msgstr "Miniatures supplémentaires"
-
 msgid "Add user defined thumbnails"
 msgstr "Ajoute des tailles de miniatures supplémentaires"
+
+msgid "User defined thumbnails"
+msgstr "Miniatures supplémentaires"
 
 msgid "Activate user defined thumbnails for this blog"
 msgstr "Activer les tailles de miniatures supplémentaires pour ce blog"
