@@ -23,4 +23,3 @@ $this->registerModule(
 		'permissions' =>	'usage,contentadmin'
 	)
 );
-?>

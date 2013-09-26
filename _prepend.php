@@ -14,7 +14,7 @@
 
 if (!defined('DC_RC_PATH')) { return; }
 
-$GLOBALS['core']->addBehavior('coreMediaConstruct',array('behaviorUserThumbSizes','coreMediaConstruct'));
+$core->addBehavior('coreMediaConstruct',array('behaviorUserThumbSizes','coreMediaConstruct'));
 
 class behaviorUserThumbSizes
 {
@@ -50,4 +50,3 @@ class behaviorUserThumbSizes
 		}
 	}
 }
-?>
