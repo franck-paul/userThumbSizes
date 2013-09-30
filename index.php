@@ -69,7 +69,7 @@ if (!empty($_POST))
 echo dcPage::breadcrumb(
 	array(
 		html::escapeHTML($core->blog->name) => '',
-		'<span class="page-title">'.__('User defined thumbnails').'</span>' => ''
+		__('User defined thumbnails') => ''
 	));
 
 if (!empty($_GET['upd'])) {
