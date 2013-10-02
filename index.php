@@ -50,7 +50,8 @@ if (!empty($_POST))
 		//$core->emptyTemplatesCache();
 		$core->blog->triggerBlog();
 
-		http::redirect($p_url.'&upd=1');
+		dcPage::addSuccessNotice(__('Settings have been successfully updated.'));
+		http::redirect($p_url);
 	}
 	catch (Exception $e)
 	{
@@ -71,10 +72,7 @@ echo dcPage::breadcrumb(
 		html::escapeHTML($core->blog->name) => '',
 		__('User defined thumbnails') => ''
 	));
-
-if (!empty($_GET['upd'])) {
-	dcPage::success(__('Settings have been successfully updated.'));
-}
+echo dcPage::notices();
 
 echo
 '<form action="'.$p_url.'" method="post">'.
