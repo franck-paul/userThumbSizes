@@ -22,30 +22,32 @@ class behaviorUserThumbSizes
 	{
 		global $core;
 
-		$touch = false;
-		$core->blog->settings->addNamespace('userthumbsizes');
-		if ($core->blog->settings->userthumbsizes->active) {
-			if ($core->blog->settings->userthumbsizes->sizes != '') {
-				// userThumbSizes active and some sizes to defined
-				$sizes = @unserialize($core->blog->settings->userthumbsizes->sizes);
-				if (is_array($sizes)) {
-					foreach ($sizes as $code => $size) {
-						if (!array_key_exists($code,$media->thumb_sizes)) {
-							// [0] = largest size in pixels
-							// [1] = label
-							$media->thumb_sizes[$code] = array($size[0],'ratio',__($size[1]));
-							$touch = true;
+		if ($core->blog !== null) {
+			$touch = false;
+			$core->blog->settings->addNamespace('userthumbsizes');
+			if ($core->blog->settings->userthumbsizes->active) {
+				if ($core->blog->settings->userthumbsizes->sizes != '') {
+					// userThumbSizes active and some sizes to defined
+					$sizes = @unserialize($core->blog->settings->userthumbsizes->sizes);
+					if (is_array($sizes)) {
+						foreach ($sizes as $code => $size) {
+							if (!array_key_exists($code,$media->thumb_sizes)) {
+								// [0] = largest size in pixels
+								// [1] = label
+								$media->thumb_sizes[$code] = array($size[0],'ratio',__($size[1]));
+								$touch = true;
+							}
 						}
 					}
 				}
-			}
-			if ($touch) {
-				// Sort thumb_sizes DESC on largest sizes
-				$sizes = array();
-				foreach ($media->thumb_sizes as $code => $size) {
-					$sizes[$code] = $size[0];
+				if ($touch) {
+					// Sort thumb_sizes DESC on largest sizes
+					$sizes = array();
+					foreach ($media->thumb_sizes as $code => $size) {
+						$sizes[$code] = $size[0];
+					}
+					array_multisort($sizes,SORT_DESC,$media->thumb_sizes);
 				}
-				array_multisort($sizes,SORT_DESC,$media->thumb_sizes);
 			}
 		}
 	}
