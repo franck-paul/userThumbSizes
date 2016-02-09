@@ -26,17 +26,15 @@ class behaviorUserThumbSizes
 			$touch = false;
 			$core->blog->settings->addNamespace('userthumbsizes');
 			if ($core->blog->settings->userthumbsizes->active) {
-				if ($core->blog->settings->userthumbsizes->sizes != '') {
+				if (is_array($core->blog->settings->userthumbsizes->sizes)) {
 					// userThumbSizes active and some sizes to defined
-					$sizes = @unserialize($core->blog->settings->userthumbsizes->sizes);
-					if (is_array($sizes)) {
-						foreach ($sizes as $code => $size) {
-							if (!array_key_exists($code,$media->thumb_sizes)) {
-								// [0] = largest size in pixels
-								// [1] = label
-								$media->thumb_sizes[$code] = array($size[0],'ratio',__($size[1]));
-								$touch = true;
-							}
+					$sizes = $core->blog->settings->userthumbsizes->sizes;
+					foreach ($sizes as $code => $size) {
+						if (!array_key_exists($code,$media->thumb_sizes)) {
+							// [0] = largest size in pixels
+							// [1] = label
+							$media->thumb_sizes[$code] = array($size[0],'ratio',__($size[1]));
+							$touch = true;
 						}
 					}
 				}

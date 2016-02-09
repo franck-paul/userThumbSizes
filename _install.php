@@ -21,11 +21,21 @@ if (version_compare($old_version,$new_version,'>=')) return;
 
 try
 {
+	if (version_compare($old_version,'0.4') < 0) {
+		// Convert oldschool settings
+		dcUpgrade::settings2array('userthumbsizes','sizes');
+	}
+
+	// Create namespace if necessary
 	$core->blog->settings->addNamespace('userthumbsizes');
 
-	// Default state is inactive
-	$core->blog->settings->userthumbsizes->put('active',false,'boolean','Active',false,true);
-	$core->blog->settings->userthumbsizes->put('sizes','','string','Sizes',false,true);
+	// Chech if settings exist, create them if not
+	if (!$core->blog->settings->userthumbsizes->getGlobal('active')) {
+		$core->blog->settings->userthumbsizes->put('active',false,'boolean','Active',false,true);
+	}
+	if (!$core->blog->settings->userthumbsizes->getGlobal('sizes')) {
+		$core->blog->settings->userthumbsizes->put('sizes',array(),'array','Sizes',false,true);
+	}
 
 	$core->setVersion('userThumbSizes',$new_version);
 

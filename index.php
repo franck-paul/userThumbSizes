@@ -16,7 +16,7 @@ if (!defined('DC_CONTEXT_ADMIN')) { return; }
 
 $core->blog->settings->addNamespace('userthumbsizes');
 $uts_active = (boolean) $core->blog->settings->userthumbsizes->active;
-$uts_sizes = @unserialize($core->blog->settings->userthumbsizes->sizes);
+$uts_sizes = $core->blog->settings->userthumbsizes->sizes;
 if (!is_array($uts_sizes)) {
 	$uts_sizes = array();
 }
@@ -45,7 +45,7 @@ if (!empty($_POST))
 		# Everything's fine, save options
 		$core->blog->settings->addNamespace('userthumbsizes');
 		$core->blog->settings->userthumbsizes->put('active',$uts_active);
-		$core->blog->settings->userthumbsizes->put('sizes',(count($uts_sizes) ? serialize($uts_sizes) : ''));
+		$core->blog->settings->userthumbsizes->put('sizes',$uts_sizes);
 
 		//$core->emptyTemplatesCache();
 		$core->blog->triggerBlog();
@@ -89,11 +89,13 @@ echo
 '<tbody>';
 
 foreach ($uts_sizes as $code => $size) {
-	echo '<tr>'.
-			'<td scope="row">'.form::field(array('uts_codes[]'),1,1,$code).'</td>'.
-			'<td>'.form::field(array('uts_sizes[]'),3,3,$size[0]).'</td>'.
-			'<td>'.form::field(array('uts_labels[]'),30,255,$size[1]).'</td>'.
-		'</tr>';
+	if (is_array($size)) {
+		echo '<tr>'.
+				'<td scope="row">'.form::field(array('uts_codes[]'),1,1,$code).'</td>'.
+				'<td>'.form::field(array('uts_sizes[]'),3,3,$size[0]).'</td>'.
+				'<td>'.form::field(array('uts_labels[]'),30,255,$size[1]).'</td>'.
+			'</tr>';
+	}
 }
 // Empty row in order to add new thumbnail size
 echo
