@@ -33,7 +33,9 @@ class behaviorUserThumbSizes
 						if (!array_key_exists($code,$media->thumb_sizes)) {
 							// [0] = largest size in pixels
 							// [1] = label
-							$media->thumb_sizes[$code] = array($size[0],'ratio',__($size[1]));
+							// [2] = mode
+							$mode = isset($size[2]) && $size[2] != '' ? $size[2] : 'ratio';
+							$media->thumb_sizes[$code] = array($size[0],$mode,__($size[1]));
 							$touch = true;
 						}
 					}

@@ -22,6 +22,7 @@ if (!is_array($uts_sizes)) {
 }
 
 $excluded_codes = array('sq','t','s','m','o');
+$modes_combo = array('ratio' => '','crop' => 'crop');
 
 if (!empty($_POST))
 {
@@ -35,8 +36,9 @@ if (!empty($_POST))
 				if (($code != '') && (!in_array($code,$excluded_codes))) {
 					$size = isset($_POST['uts_sizes'][$i]) ? abs((integer) $_POST['uts_sizes'][$i]) : 0;
 					$label = isset($_POST['uts_labels'][$i]) ? $_POST['uts_labels'][$i] : '';
+					$mode = isset($_POST['uts_modes'][$i]) ? $_POST['uts_modes'][$i] : 'ratio';
 					if (($size > 0) && ($label != '')) {
-						$uts_sizes[$code] = array($size,$label);
+						$uts_sizes[$code] = array($size,$label,$mode);
 					}
 				}
 			}
@@ -45,7 +47,7 @@ if (!empty($_POST))
 		# Everything's fine, save options
 		$core->blog->settings->addNamespace('userthumbsizes');
 		$core->blog->settings->userthumbsizes->put('active',$uts_active);
-		$core->blog->settings->userthumbsizes->put('sizes',$uts_sizes);
+		$core->blog->settings->userthumbsizes->put('sizes',$uts_sizes,'array');
 
 		//$core->emptyTemplatesCache();
 		$core->blog->triggerBlog();
@@ -84,6 +86,7 @@ echo
 '<thead><tr>'.
 	'<th scope="col">'.__('Code').'</th>'.
 	'<th scope="col">'.__('Size in pixels').'</th>'.
+	'<th scope="col">'.__('Mode').'</th>'.
 	'<th scope="col">'.__('Label').'</th>'.
 '</tr></thead>'.
 '<tbody>';
@@ -93,6 +96,7 @@ foreach ($uts_sizes as $code => $size) {
 		echo '<tr>'.
 				'<td scope="row">'.form::field(array('uts_codes[]'),1,1,$code).'</td>'.
 				'<td>'.form::field(array('uts_sizes[]'),3,3,$size[0]).'</td>'.
+				'<td>'.form::combo(array('uts_modes[]'),$modes_combo,isset($size[2]) ? $size[2] : '').'</td>'.
 				'<td>'.form::field(array('uts_labels[]'),30,255,$size[1]).'</td>'.
 			'</tr>';
 	}
@@ -102,6 +106,7 @@ echo
 '<tr>'.
 	'<td scope="row">'.form::field(array('uts_codes[]'),1,1,'').'</td>'.
 	'<td>'.form::field(array('uts_sizes[]'),3,3,'').'</td>'.
+	'<td>'.form::combo(array('uts_modes[]'),$modes_combo,'').'</td>'.
 	'<td>'.form::field(array('uts_labels[]'),30,255,'').'</td>'.
 '</tr>'.
 '</tbody></table>';
@@ -109,6 +114,7 @@ echo
 echo
 '<p class="form-note">'.__('Clear any field in row to delete this row').'</p>'.
 '<p class="form-note">'.sprintf(__('Code must not be one of these: %s'),implode(', ',$excluded_codes)).'</p>'.
+'<p class="form-note">'.__('Mode: <strong>ratio</strong> will preserve aspect, <strong>crop</strong> will produce square').'</p>'.
 
 '<p>'.$core->formNonce().'<input type="submit" value="'.__('Save').'" /></p>'.
 '</form>';
