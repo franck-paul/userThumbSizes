@@ -14,14 +14,14 @@
 
 if (!defined('DC_RC_PATH')) { return; }
 
-$this->registerModule(
-	/* Name */			"User defined thumbnails",
-	/* Description*/		"Add user defined thumbnails",
-	/* Author */			"Franck Paul",
-	/* Version */			'0.4.1',
-	array(
-		/* Dependencies */	'requires' 		=>	array(array('core','2.9')),
-		/* Permissions */	'permissions'	=>	'usage,contentadmin',
-		/* Type */			'type' 			=>	'plugin'
-	)
-);
+$core->addBehavior('publicPrepend',array('behaviorPublicUserThumbSizes','publicPrepend'));
+
+class behaviorPublicUserThumbSizes
+{
+	public static function publicPrepend($core)
+	{
+		if ($core->media) {
+			behaviorUserThumbSizes::coreMediaConstruct($core->media);
+		}
+	}
+}
