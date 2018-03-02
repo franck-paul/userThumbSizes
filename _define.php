@@ -12,16 +12,17 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 # -- END LICENSE BLOCK ------------------------------------
 
-if (!defined('DC_RC_PATH')) { return; }
+if (!defined('DC_RC_PATH')) {return;}
 
 $this->registerModule(
-	/* Name */			"User defined thumbnails",
-	/* Description*/		"Add user defined thumbnails",
-	/* Author */			"Franck Paul",
-	/* Version */			'0.4.1',
-	array(
-		/* Dependencies */	'requires' 		=>	array(array('core','2.9')),
-		/* Permissions */	'permissions'	=>	'usage,contentadmin',
-		/* Type */			'type' 			=>	'plugin'
-	)
+    "User defined thumbnails",     // Name
+    "Add user defined thumbnails", // Description
+    "Franck Paul",                 // Author
+    '0.5',                         // Version
+    array(
+        'requires'    => array(array('core', '2.14')),
+        'permissions' => 'usage,contentadmin',
+        'support'     => 'https://open-time.net/?q=userThumbSizes',
+        'type'        => 'plugin'
+    )
 );

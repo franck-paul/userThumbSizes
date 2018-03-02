@@ -12,37 +12,37 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 # -- END LICENSE BLOCK ------------------------------------
 
-if (!defined('DC_CONTEXT_ADMIN')) { return; }
+if (!defined('DC_CONTEXT_ADMIN')) {return;}
 
-$new_version = $core->plugins->moduleInfo('userThumbSizes','version');
+$new_version = $core->plugins->moduleInfo('userThumbSizes', 'version');
 $old_version = $core->getVersion('userThumbSizes');
 
-if (version_compare($old_version,$new_version,'>=')) return;
+if (version_compare($old_version, $new_version, '>=')) {
+    return;
+}
 
 try
 {
-	if (version_compare($old_version,'0.4') < 0) {
-		// Convert oldschool settings
-		dcUpgrade::settings2array('userthumbsizes','sizes');
-	}
+    if (version_compare($old_version, '0.4') < 0) {
+        // Convert oldschool settings
+        dcUpgrade::settings2array('userthumbsizes', 'sizes');
+    }
 
-	// Create namespace if necessary
-	$core->blog->settings->addNamespace('userthumbsizes');
+    // Create namespace if necessary
+    $core->blog->settings->addNamespace('userthumbsizes');
 
-	// Chech if settings exist, create them if not
-	if (!$core->blog->settings->userthumbsizes->getGlobal('active')) {
-		$core->blog->settings->userthumbsizes->put('active',false,'boolean','Active',false,true);
-	}
-	if (!$core->blog->settings->userthumbsizes->getGlobal('sizes')) {
-		$core->blog->settings->userthumbsizes->put('sizes',array(),'array','Sizes',false,true);
-	}
+    // Chech if settings exist, create them if not
+    if (!$core->blog->settings->userthumbsizes->getGlobal('active')) {
+        $core->blog->settings->userthumbsizes->put('active', false, 'boolean', 'Active', false, true);
+    }
+    if (!$core->blog->settings->userthumbsizes->getGlobal('sizes')) {
+        $core->blog->settings->userthumbsizes->put('sizes', array(), 'array', 'Sizes', false, true);
+    }
 
-	$core->setVersion('userThumbSizes',$new_version);
+    $core->setVersion('userThumbSizes', $new_version);
 
-	return true;
-}
-catch (Exception $e)
-{
-	$core->error->add($e->getMessage());
+    return true;
+} catch (Exception $e) {
+    $core->error->add($e->getMessage());
 }
 return false;

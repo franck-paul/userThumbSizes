@@ -12,16 +12,16 @@
 # http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 # -- END LICENSE BLOCK ------------------------------------
 
-if (!defined('DC_RC_PATH')) { return; }
+if (!defined('DC_RC_PATH')) {return;}
 
-$core->addBehavior('publicPrepend',array('behaviorPublicUserThumbSizes','publicPrepend'));
+$core->addBehavior('publicPrepend', array('behaviorPublicUserThumbSizes', 'publicPrepend'));
 
 class behaviorPublicUserThumbSizes
 {
-	public static function publicPrepend($core)
-	{
-		if ($core->media) {
-			behaviorUserThumbSizes::coreMediaConstruct($core->media);
-		}
-	}
+    public static function publicPrepend($core)
+    {
+        if ($core->media) {
+            behaviorUserThumbSizes::coreMediaConstruct($core->media);
+        }
+    }
 }
