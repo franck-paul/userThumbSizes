@@ -18,7 +18,7 @@ $this->registerModule(
 	/* Name */			"User defined thumbnails",
 	/* Description*/		"Add user defined thumbnails",
 	/* Author */			"Franck Paul",
-	/* Version */			'0.4.1',
+	/* Version */			'0.4.2',
 	array(
 		/* Dependencies */	'requires' 		=>	array(array('core','2.9')),
 		/* Permissions */	'permissions'	=>	'usage,contentadmin',

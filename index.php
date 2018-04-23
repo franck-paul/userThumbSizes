@@ -95,7 +95,7 @@ foreach ($uts_sizes as $code => $size) {
 	if (is_array($size)) {
 		echo '<tr>'.
 				'<td scope="row">'.form::field(array('uts_codes[]'),1,1,$code).'</td>'.
-				'<td>'.form::field(array('uts_sizes[]'),3,3,$size[0]).'</td>'.
+				'<td>'.form::field(array('uts_sizes[]'),4,4,$size[0]).'</td>'.
 				'<td>'.form::combo(array('uts_modes[]'),$modes_combo,isset($size[2]) ? $size[2] : '').'</td>'.
 				'<td>'.form::field(array('uts_labels[]'),30,255,$size[1]).'</td>'.
 			'</tr>';
@@ -105,7 +105,7 @@ foreach ($uts_sizes as $code => $size) {
 echo
 '<tr>'.
 	'<td scope="row">'.form::field(array('uts_codes[]'),1,1,'').'</td>'.
-	'<td>'.form::field(array('uts_sizes[]'),3,3,'').'</td>'.
+	'<td>'.form::field(array('uts_sizes[]'),4,4,'').'</td>'.
 	'<td>'.form::combo(array('uts_modes[]'),$modes_combo,'').'</td>'.
 	'<td>'.form::field(array('uts_labels[]'),30,255,'').'</td>'.
 '</tr>'.
