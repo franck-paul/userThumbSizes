@@ -13,7 +13,7 @@
 
 if (!defined('DC_RC_PATH')) {return;}
 
-$core->addBehavior('publicPrepend', array('behaviorPublicUserThumbSizes', 'publicPrepend'));
+$core->addBehavior('publicPrepend', ['behaviorPublicUserThumbSizes', 'publicPrepend']);
 
 class behaviorPublicUserThumbSizes
 {

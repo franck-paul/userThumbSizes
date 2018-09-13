@@ -17,11 +17,11 @@ $this->registerModule(
     "User defined thumbnails",     // Name
     "Add user defined thumbnails", // Description
     "Franck Paul",                 // Author
-    '0.5',                         // Version
-	array(
-        'requires'    => array(array('core', '2.14')),
+    '0.6',                         // Version
+	[
+        'requires'    => [['core', '2.14']],
         'permissions' => 'usage,contentadmin',
         'support'     => 'https://open-time.net/?q=userThumbSizes',
         'type'        => 'plugin'
-	)
+	]
 );

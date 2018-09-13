@@ -13,7 +13,7 @@
 
 if (!defined('DC_RC_PATH')) {return;}
 
-$core->addBehavior('coreMediaConstruct', array('behaviorUserThumbSizes', 'coreMediaConstruct'));
+$core->addBehavior('coreMediaConstruct', ['behaviorUserThumbSizes', 'coreMediaConstruct']);
 
 class behaviorUserThumbSizes
 {
@@ -34,14 +34,14 @@ class behaviorUserThumbSizes
                             // [1] = label
                             // [2] = mode
                             $mode                      = isset($size[2]) && $size[2] != '' ? $size[2] : 'ratio';
-                            $media->thumb_sizes[$code] = array($size[0], $mode, __($size[1]));
+                            $media->thumb_sizes[$code] = [$size[0], $mode, __($size[1])];
                             $touch                     = true;
                         }
                     }
                 }
                 if ($touch) {
                     // Sort thumb_sizes DESC on largest sizes
-                    $sizes = array();
+                    $sizes = [];
                     foreach ($media->thumb_sizes as $code => $size) {
                         $sizes[$code] = $size[0];
                     }

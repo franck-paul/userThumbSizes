@@ -35,7 +35,7 @@ try
         $core->blog->settings->userthumbsizes->put('active', false, 'boolean', 'Active', false, true);
     }
     if (!$core->blog->settings->userthumbsizes->getGlobal('sizes')) {
-        $core->blog->settings->userthumbsizes->put('sizes', array(), 'array', 'Sizes', false, true);
+        $core->blog->settings->userthumbsizes->put('sizes', [], 'array', 'Sizes', false, true);
     }
 
     $core->setVersion('userThumbSizes', $new_version);

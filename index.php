@@ -17,17 +17,17 @@ $core->blog->settings->addNamespace('userthumbsizes');
 $uts_active = (boolean) $core->blog->settings->userthumbsizes->active;
 $uts_sizes  = $core->blog->settings->userthumbsizes->sizes;
 if (!is_array($uts_sizes)) {
-	$uts_sizes = array();
+	$uts_sizes = [];
 }
 
-$excluded_codes = array('sq', 't', 's', 'm', 'o');
-$modes_combo    = array('ratio' => '', 'crop' => 'crop');
+$excluded_codes = ['sq', 't', 's', 'm', 'o'];
+$modes_combo    = ['ratio' => '', 'crop' => 'crop'];
 
 if (!empty($_POST)) {
 	try
 	{
 		$uts_active = (boolean) $_POST['uts_active'];
-        $uts_sizes  = array();
+        $uts_sizes  = [];
 		if (!empty($_POST['uts_codes'])) {
 			for ($i = 0; $i < count($_POST['uts_codes']); $i++) {
 				$code = $_POST['uts_codes'][$i];
@@ -36,7 +36,7 @@ if (!empty($_POST)) {
 					$label = isset($_POST['uts_labels'][$i]) ? $_POST['uts_labels'][$i] : '';
                     $mode  = isset($_POST['uts_modes'][$i]) ? $_POST['uts_modes'][$i] : 'ratio';
 					if (($size > 0) && ($label != '')) {
-                        $uts_sizes[$code] = array($size, $label, $mode);
+                        $uts_sizes[$code] = [$size, $label, $mode];
 					}
 				}
 			}
@@ -66,10 +66,10 @@ if (!empty($_POST)) {
 <body>
 <?php
 echo dcPage::breadcrumb(
-	array(
+	[
 		html::escapeHTML($core->blog->name) => '',
         __('User defined thumbnails')       => ''
-	));
+	]);
 echo dcPage::notices();
 
 echo
@@ -90,27 +90,27 @@ echo
 foreach ($uts_sizes as $code => $size) {
 	if (is_array($size)) {
         echo '<tr>' .
-        '<td scope="row">' . form::field(array('uts_codes[]'), 1, 1, $code) . '</td>' .
-        '<td>' . form::number(array('uts_sizes[]'), array(
+        '<td scope="row">' . form::field(['uts_codes[]'], 1, 1, $code) . '</td>' .
+        '<td>' . form::number(['uts_sizes[]'], [
             'min'     => 0,
             'max'     => 9999,
             'default' => $size[0]
-        )) . '</td>' .
-        '<td>' . form::combo(array('uts_modes[]'), $modes_combo, isset($size[2]) ? $size[2] : '') . '</td>' .
-        '<td>' . form::field(array('uts_labels[]'), 30, 255, $size[1]) . '</td>' .
+        ]) . '</td>' .
+        '<td>' . form::combo(['uts_modes[]'], $modes_combo, isset($size[2]) ? $size[2] : '') . '</td>' .
+        '<td>' . form::field(['uts_labels[]'], 30, 255, $size[1]) . '</td>' .
 			'</tr>';
 	}
 }
 // Empty row in order to add new thumbnail size
 echo
 '<tr>' .
-'<td scope="row">' . form::field(array('uts_codes[]'), 1, 1, '') . '</td>' .
-'<td>' . form::number(array('uts_sizes[]'), array(
+'<td scope="row">' . form::field(['uts_codes[]'], 1, 1, '') . '</td>' .
+'<td>' . form::number(['uts_sizes[]'], [
     'min' => 0,
     'max' => 9999
-)) . '</td>' .
-'<td>' . form::combo(array('uts_modes[]'), $modes_combo) . '</td>' .
-'<td>' . form::field(array('uts_labels[]'), 30, 255, '') . '</td>' .
+]) . '</td>' .
+'<td>' . form::combo(['uts_modes[]'], $modes_combo) . '</td>' .
+'<td>' . form::field(['uts_labels[]'], 30, 255, '') . '</td>' .
     '</tr>' .
 '</tbody></table>';
 
