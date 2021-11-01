@@ -26,6 +26,6 @@ $this->registerModule(
 
         'details'    => 'https://open-time.net/?q=userThumbSizes',        // Details URL
         'support'    => 'https://github.com/franck-paul/userThumbSizes',  // Support URL
-        'repository' => 'https://raw.githubusercontent.com/franck-paul/userThumbSizes/main/dcstore.xml'
+        'repository' => 'https://raw.githubusercontent.com/franck-paul/userThumbSizes/master/dcstore.xml'
     ]
 );
