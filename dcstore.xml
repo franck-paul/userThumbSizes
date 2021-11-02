@@ -1,8 +1,8 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="userThumbSizes">
-    <name>User defined thumbnails</name>
+    <name>Add user defined thumbnails</name>
     <version>0.6</version>
-    <author>Franck Paul</author>
+    <author>Add user defined thumbnails</author>
     <desc>Add user defined thumbnails</desc>
     <file>https://github.com/franck-paul/userThumbSizes/releases/download/0.6/plugin-userThumbSizes-0.6.zip</file>
     <da:dcmin>2.14</da:dcmin>
