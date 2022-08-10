@@ -10,24 +10,23 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
+if (!defined('DC_RC_PATH')) {
+    return;
+}
 
-if (!defined('DC_RC_PATH')) {return;}
-
-$core->addBehavior('coreMediaConstruct', ['behaviorUserThumbSizes', 'coreMediaConstruct']);
+dcCore::app()->addBehavior('coreMediaConstruct', ['behaviorUserThumbSizes', 'coreMediaConstruct']);
 
 class behaviorUserThumbSizes
 {
     public static function coreMediaConstruct($media)
     {
-        global $core;
-
-        if ($core->blog !== null) {
+        if (dcCore::app()->blog !== null) {
             $touch = false;
-            $core->blog->settings->addNamespace('userthumbsizes');
-            if ($core->blog->settings->userthumbsizes->active) {
-                if (is_array($core->blog->settings->userthumbsizes->sizes)) {
+            dcCore::app()->blog->settings->addNamespace('userthumbsizes');
+            if (dcCore::app()->blog->settings->userthumbsizes->active) {
+                if (is_array(dcCore::app()->blog->settings->userthumbsizes->sizes)) {
                     // userThumbSizes active and some sizes to defined
-                    $sizes = $core->blog->settings->userthumbsizes->sizes;
+                    $sizes = dcCore::app()->blog->settings->userthumbsizes->sizes;
                     foreach ($sizes as $code => $size) {
                         if (!array_key_exists($code, $media->thumb_sizes)) {
                             // [0] = largest size in pixels

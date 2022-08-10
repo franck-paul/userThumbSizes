@@ -10,17 +10,18 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
+if (!defined('DC_RC_PATH')) {
+    return;
+}
 
-if (!defined('DC_RC_PATH')) {return;}
-
-$core->addBehavior('publicPrepend', ['behaviorPublicUserThumbSizes', 'publicPrepend']);
+dcCore::app()->addBehavior('publicPrepend', ['behaviorPublicUserThumbSizes', 'publicPrepend']);
 
 class behaviorPublicUserThumbSizes
 {
-    public static function publicPrepend($core)
+    public static function publicPrepend($core = null)
     {
-        if ($core->media) {
-            behaviorUserThumbSizes::coreMediaConstruct($core->media);
+        if (dcCore::app()->media) {
+            behaviorUserThumbSizes::coreMediaConstruct(dcCore::app()->media);
         }
     }
 }
