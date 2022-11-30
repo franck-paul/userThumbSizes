@@ -15,17 +15,20 @@ if (!defined('DC_RC_PATH')) {
 }
 
 $this->registerModule(
-    'User defined thumbnails',     // Name
-    'Add user defined thumbnails', // Description
-    'Franck Paul',                 // Author
-    '0.6',                         // Version
+    'User defined thumbnails',
+    'Add user defined thumbnails',
+    'Franck Paul',
+    '1.0',
     [
-        'requires'    => [['core', '2.23']],
-        'permissions' => 'usage,contentadmin',
-        'type'        => 'plugin',
+        'requires'    => [['core', '2.24']],
+        'permissions' => dcCore::app()->auth->makePermissions([
+            dcAuth::PERMISSION_USAGE,
+            dcAuth::PERMISSION_CONTENT_ADMIN,
+        ]),
+        'type' => 'plugin',
 
-        'details'    => 'https://open-time.net/?q=userThumbSizes',        // Details URL
-        'support'    => 'https://github.com/franck-paul/userThumbSizes',  // Support URL
+        'details'    => 'https://open-time.net/?q=userThumbSizes',
+        'support'    => 'https://github.com/franck-paul/userThumbSizes',
         'repository' => 'https://raw.githubusercontent.com/franck-paul/userThumbSizes/master/dcstore.xml',
     ]
 );

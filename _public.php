@@ -14,14 +14,14 @@ if (!defined('DC_RC_PATH')) {
     return;
 }
 
-dcCore::app()->addBehavior('publicPrepend', ['behaviorPublicUserThumbSizes', 'publicPrepend']);
-
 class behaviorPublicUserThumbSizes
 {
-    public static function publicPrepend($core = null)
+    public static function publicPrepend()
     {
         if (dcCore::app()->media) {
             behaviorUserThumbSizes::coreMediaConstruct(dcCore::app()->media);
         }
     }
 }
+
+dcCore::app()->addBehavior('publicPrependV2', [behaviorPublicUserThumbSizes::class, 'publicPrepend']);

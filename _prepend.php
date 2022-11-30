@@ -14,8 +14,6 @@ if (!defined('DC_RC_PATH')) {
     return;
 }
 
-dcCore::app()->addBehavior('coreMediaConstruct', ['behaviorUserThumbSizes', 'coreMediaConstruct']);
-
 class behaviorUserThumbSizes
 {
     public static function coreMediaConstruct($media)
@@ -50,3 +48,5 @@ class behaviorUserThumbSizes
         }
     }
 }
+
+dcCore::app()->addBehavior('coreMediaConstruct', [behaviorUserThumbSizes::class, 'coreMediaConstruct']);

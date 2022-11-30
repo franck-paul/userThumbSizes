@@ -47,7 +47,6 @@ if (!empty($_POST)) {
         dcCore::app()->blog->settings->userthumbsizes->put('active', $uts_active);
         dcCore::app()->blog->settings->userthumbsizes->put('sizes', $uts_sizes, 'array');
 
-        //dcCore::app()->emptyTemplatesCache();
         dcCore::app()->blog->triggerBlog();
 
         dcPage::addSuccessNotice(__('Settings have been successfully updated.'));
