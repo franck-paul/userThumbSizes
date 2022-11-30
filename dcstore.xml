@@ -1,11 +1,11 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="userThumbSizes">
     <name>User defined thumbnails</name>
-    <version>0.6</version>
+    <version>1.0</version>
     <author>Franck Paul</author>
     <desc>Add user defined thumbnails</desc>
-    <file>https://github.com/franck-paul/userThumbSizes/releases/download/0.6/plugin-userThumbSizes-0.6.zip</file>
-    <da:dcmin>2.23</da:dcmin>
+    <file>https://github.com/franck-paul/userThumbSizes/releases/download/1.0/plugin-userThumbSizes-1.0.zip</file>
+    <da:dcmin>2.24</da:dcmin>
     <da:details>https://open-time.net/?q=userThumbSizes</da:details>
     <da:support>https://github.com/franck-paul/userThumbSizes</da:support>
   </module>
