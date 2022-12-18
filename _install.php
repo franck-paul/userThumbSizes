@@ -14,19 +14,11 @@ if (!defined('DC_CONTEXT_ADMIN')) {
     return;
 }
 
-$new_version = dcCore::app()->plugins->moduleInfo('userThumbSizes', 'version');
-$old_version = dcCore::app()->getVersion('userThumbSizes');
-
-if (version_compare((string) $old_version, $new_version, '>=')) {
+if (!dcCore::app()->newVersion(basename(__DIR__), dcCore::app()->plugins->moduleInfo(basename(__DIR__), 'version'))) {
     return;
 }
 
 try {
-    if (version_compare((string) $old_version, '0.4') < 0) {
-        // Convert oldschool settings
-        dcUpgrade::settings2array('userthumbsizes', 'sizes');
-    }
-
     // Create namespace if necessary
     dcCore::app()->blog->settings->addNamespace('userthumbsizes');
 
@@ -37,8 +29,6 @@ try {
     if (!dcCore::app()->blog->settings->userthumbsizes->getGlobal('sizes')) {
         dcCore::app()->blog->settings->userthumbsizes->put('sizes', [], 'array', 'Sizes', false, true);
     }
-
-    dcCore::app()->setVersion('userThumbSizes', $new_version);
 
     return true;
 } catch (Exception $e) {
