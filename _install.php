@@ -19,9 +19,6 @@ if (!dcCore::app()->newVersion(basename(__DIR__), dcCore::app()->plugins->module
 }
 
 try {
-    // Create namespace if necessary
-    dcCore::app()->blog->settings->addNamespace('userthumbsizes');
-
     // Chech if settings exist, create them if not
     if (!dcCore::app()->blog->settings->userthumbsizes->getGlobal('active')) {
         dcCore::app()->blog->settings->userthumbsizes->put('active', false, 'boolean', 'Active', false, true);

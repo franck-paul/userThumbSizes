@@ -10,11 +10,14 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
+
+use Dotclear\Helper\Html\Html;
+use Dotclear\Helper\Network\Http;
+
 if (!defined('DC_CONTEXT_ADMIN')) {
     return;
 }
 
-dcCore::app()->blog->settings->addNamespace('userthumbsizes');
 $uts_active = (bool) dcCore::app()->blog->settings->userthumbsizes->active;
 $uts_sizes  = dcCore::app()->blog->settings->userthumbsizes->sizes;
 if (!is_array($uts_sizes)) {
@@ -29,7 +32,7 @@ if (!empty($_POST)) {
         $uts_active = (bool) $_POST['uts_active'];
         $uts_sizes  = [];
         if (!empty($_POST['uts_codes'])) {
-            for ($i = 0; $i < count($_POST['uts_codes']); $i++) {
+            for ($i = 0; $i < (is_countable($_POST['uts_codes']) ? count($_POST['uts_codes']) : 0); $i++) {
                 $code = $_POST['uts_codes'][$i];
                 if (($code != '') && (!in_array($code, $excluded_codes))) {
                     $size  = isset($_POST['uts_sizes'][$i]) ? abs((int) $_POST['uts_sizes'][$i]) : 0;
@@ -43,14 +46,13 @@ if (!empty($_POST)) {
         }
 
         # Everything's fine, save options
-        dcCore::app()->blog->settings->addNamespace('userthumbsizes');
         dcCore::app()->blog->settings->userthumbsizes->put('active', $uts_active);
         dcCore::app()->blog->settings->userthumbsizes->put('sizes', $uts_sizes, 'array');
 
         dcCore::app()->blog->triggerBlog();
 
         dcPage::addSuccessNotice(__('Settings have been successfully updated.'));
-        http::redirect(dcCore::app()->admin->getPageURL());
+        Http::redirect(dcCore::app()->admin->getPageURL());
     } catch (Exception $e) {
         dcCore::app()->error->add($e->getMessage());
     }
@@ -66,7 +68,7 @@ if (!empty($_POST)) {
 <?php
 echo dcPage::breadcrumb(
     [
-        html::escapeHTML(dcCore::app()->blog->name) => '',
+        Html::escapeHTML(dcCore::app()->blog->name) => '',
         __('User defined thumbnails')               => '',
     ]
 );

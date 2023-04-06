@@ -10,17 +10,12 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-if (!defined('DC_RC_PATH')) {
-    return;
-}
-
 class behaviorUserThumbSizes
 {
     public static function coreMediaConstruct($media)
     {
         if (dcCore::app()->blog !== null) {
             $touch = false;
-            dcCore::app()->blog->settings->addNamespace('userthumbsizes');
             if (dcCore::app()->blog->settings->userthumbsizes->active) {
                 if (is_array(dcCore::app()->blog->settings->userthumbsizes->sizes)) {
                     // userThumbSizes active and some sizes to defined
