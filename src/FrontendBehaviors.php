@@ -10,14 +10,18 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-class behaviorPublicUserThumbSizes
+declare(strict_types=1);
+
+namespace Dotclear\Plugin\userThumbSizes;
+
+use dcCore;
+
+class FrontendBehaviors
 {
     public static function publicPrepend()
     {
         if (dcCore::app()->media) {
-            behaviorUserThumbSizes::coreMediaConstruct(dcCore::app()->media);
+            coreBehaviors::coreMediaConstruct(dcCore::app()->media);
         }
     }
 }
-
-dcCore::app()->addBehavior('publicPrependV2', [behaviorPublicUserThumbSizes::class, 'publicPrepend']);
