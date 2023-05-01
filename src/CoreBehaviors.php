@@ -10,7 +10,13 @@
  * @copyright Franck Paul carnet.franck.paul@gmail.com
  * @copyright GPL-2.0 https://www.gnu.org/licenses/gpl-2.0.html
  */
-class behaviorUserThumbSizes
+declare(strict_types=1);
+
+namespace Dotclear\Plugin\userThumbSizes;
+
+use dcCore;
+
+class coreBehaviors
 {
     public static function coreMediaConstruct($media)
     {
@@ -43,5 +49,3 @@ class behaviorUserThumbSizes
         }
     }
 }
-
-dcCore::app()->addBehavior('coreMediaConstruct', [behaviorUserThumbSizes::class, 'coreMediaConstruct']);
