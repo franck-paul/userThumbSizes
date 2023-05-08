@@ -41,7 +41,7 @@ class Backend extends dcNsProcess
         dcCore::app()->menu[dcAdmin::MENU_BLOG]->addItem(
             __('User defined thumbnails'),
             'plugin.php?p=userThumbSizes',
-            urldecode(dcPage::getPF('userThumbSizes/icon.svg')),
+            urldecode(dcPage::getPF(My::id() . '/icon.svg')),
             preg_match('/plugin.php\?p=userThumbSizes(&.*)?$/', $_SERVER['REQUEST_URI']),
             dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
                 dcAuth::PERMISSION_CONTENT_ADMIN,

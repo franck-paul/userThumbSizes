@@ -21,11 +21,12 @@ class coreBehaviors
     public static function coreMediaConstruct($media)
     {
         if (dcCore::app()->blog !== null) {
-            $touch = false;
-            if (dcCore::app()->blog->settings->userthumbsizes->active) {
-                if (is_array(dcCore::app()->blog->settings->userthumbsizes->sizes)) {
+            $touch    = false;
+            $settings = dcCore::app()->blog->settings->get(My::id());
+            if ($settings->active) {
+                if (is_array($settings->sizes)) {
                     // userThumbSizes active and some sizes to defined
-                    $sizes = dcCore::app()->blog->settings->userthumbsizes->sizes;
+                    $sizes = $settings->sizes;
                     foreach ($sizes as $code => $size) {
                         if (!array_key_exists($code, $media->thumb_sizes)) {
                             // [0] = largest size in pixels

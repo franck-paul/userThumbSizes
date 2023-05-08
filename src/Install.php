@@ -36,12 +36,23 @@ class Install extends dcNsProcess
         }
 
         try {
-            // Chech if settings exist, create them if not
-            if (!dcCore::app()->blog->settings->userthumbsizes->getGlobal('active')) {
-                dcCore::app()->blog->settings->userthumbsizes->put('active', false, 'boolean', 'Active', false, true);
+            $settings = dcCore::app()->blog->settings->get(My::id());
+
+            // Update from older versions
+            $old_version = dcCore::app()->getVersion(My::id());
+            if (version_compare((string) $old_version, '2.2', '<')) {
+                // Rename settings namespace
+                if (dcCore::app()->blog->settings->exists('userthumbsizes')) {
+                    dcCore::app()->blog->settings->renNamespace('userthumbsizes', My::id());
+                }
             }
-            if (!dcCore::app()->blog->settings->userthumbsizes->getGlobal('sizes')) {
-                dcCore::app()->blog->settings->userthumbsizes->put('sizes', [], 'array', 'Sizes', false, true);
+
+            // Chech if settings exist, create them if not
+            if (!$settings->getGlobal('active')) {
+                $settings->put('active', false, 'boolean', 'Active', false, true);
+            }
+            if (!$settings->getGlobal('sizes')) {
+                $settings->put('sizes', [], 'array', 'Sizes', false, true);
             }
 
             return true;
