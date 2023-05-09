@@ -41,6 +41,7 @@ class Install extends dcNsProcess
             if (version_compare((string) $old_version, '2.2', '<')) {
                 // Rename settings namespace
                 if (dcCore::app()->blog->settings->exists('userthumbsizes')) {
+                    dcCore::app()->blog->settings->delNamespace(My::id());
                     dcCore::app()->blog->settings->renNamespace('userthumbsizes', My::id());
                 }
             }
