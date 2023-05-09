@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\userThumbSizes;
 
 use dcAdmin;
-use dcAuth;
 use dcCore;
 use dcNsProcess;
 use dcPage;
@@ -24,7 +23,7 @@ class Backend extends dcNsProcess
 {
     public static function init(): bool
     {
-        static::$init = defined('DC_CONTEXT_ADMIN');
+        static::$init = My::checkContext(My::BACKEND);
 
         // dead but useful code, in order to have translations
         __('User defined thumbnails') . __('Add user defined thumbnails');
@@ -43,9 +42,7 @@ class Backend extends dcNsProcess
             'plugin.php?p=userThumbSizes',
             urldecode(dcPage::getPF(My::id() . '/icon.svg')),
             preg_match('/plugin.php\?p=userThumbSizes(&.*)?$/', $_SERVER['REQUEST_URI']),
-            dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
-                dcAuth::PERMISSION_CONTENT_ADMIN,
-            ]), dcCore::app()->blog->id)
+            My::checkContext(My::MENU)
         );
 
         return true;
