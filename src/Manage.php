@@ -38,7 +38,7 @@ class Manage extends dcNsProcess
     // s = small
     // m = medium
     // o = original
-    private static $excluded_codes = ['sq', 't', 's', 'm', 'o'];
+    protected static $excluded_codes = ['sq', 't', 's', 'm', 'o'];
 
     /**
      * Initializes the page.

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Dotclear 2 userThumbSizes module\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-01 08:47+0200\n"
+"POT-Creation-Date: 2023-05-10 18:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,46 +16,46 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../git-plugins/userThumbSizes/index.php:64
-#: ../git-plugins/userThumbSizes/index.php:72
-#: ../git-plugins/userThumbSizes/src/Backend.php:30
-#: ../git-plugins/userThumbSizes/src/Backend.php:42
+#: ../git-plugins/userThumbSizes/src/Backend.php:28
+msgid "Add user defined thumbnails"
+msgstr ""
+
+#: ../git-plugins/userThumbSizes/src/Backend.php:28
+#: ../git-plugins/userThumbSizes/src/Backend.php:40
+#: ../git-plugins/userThumbSizes/src/Manage.php:104
+#: ../git-plugins/userThumbSizes/src/Manage.php:109
 msgid "User defined thumbnails"
 msgstr ""
 
-#: ../git-plugins/userThumbSizes/index.php:80
+#: ../git-plugins/userThumbSizes/src/Manage.php:185
 msgid "Activate user defined thumbnails for this blog"
 msgstr ""
 
-#: ../git-plugins/userThumbSizes/index.php:83
+#: ../git-plugins/userThumbSizes/src/Manage.php:190
 msgid "Thumbnails sizes"
 msgstr ""
 
-#: ../git-plugins/userThumbSizes/index.php:86
+#: ../git-plugins/userThumbSizes/src/Manage.php:195
 msgid "Size in pixels"
 msgstr ""
 
-#: ../git-plugins/userThumbSizes/index.php:87
+#: ../git-plugins/userThumbSizes/src/Manage.php:196
 msgid "Mode"
 msgstr ""
 
-#: ../git-plugins/userThumbSizes/index.php:120
+#: ../git-plugins/userThumbSizes/src/Manage.php:205
 msgid "Clear any field in row to delete this row"
 msgstr ""
 
-#: ../git-plugins/userThumbSizes/index.php:121
+#: ../git-plugins/userThumbSizes/src/Manage.php:208
 #, php-format
 msgid "Code must not be one of these: %s"
 msgstr ""
 
-#: ../git-plugins/userThumbSizes/index.php:122
+#: ../git-plugins/userThumbSizes/src/Manage.php:211
 msgid "Mode: <strong>ratio</strong> will preserve aspect, <strong>crop</strong> will produce square"
 msgstr ""
 
-#: ../git-plugins/userThumbSizes/index.php:124
+#: ../git-plugins/userThumbSizes/src/Manage.php:216
 msgid "Save"
-msgstr ""
-
-#: ../git-plugins/userThumbSizes/src/Backend.php:30
-msgid "Add user defined thumbnails"
 msgstr ""
