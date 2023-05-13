@@ -14,7 +14,7 @@ $this->registerModule(
     'User defined thumbnails',
     'Add user defined thumbnails',
     'Franck Paul',
-    '2.3',
+    '2.4',
     [
         'requires'    => [['core', '2.26']],
         'permissions' => dcCore::app()->auth->makePermissions([
