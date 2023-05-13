@@ -53,8 +53,6 @@ class Install extends dcNsProcess
             if (!$settings->getGlobal('sizes')) {
                 $settings->put('sizes', [], 'array', 'Sizes', false, true);
             }
-
-            return true;
         } catch (Exception $e) {
             dcCore::app()->error->add($e->getMessage());
         }
