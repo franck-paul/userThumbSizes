@@ -16,7 +16,7 @@ namespace Dotclear\Plugin\userThumbSizes;
 
 use dcCore;
 
-class coreBehaviors
+class CoreBehaviors
 {
     public static function coreMediaConstruct($media)
     {

@@ -21,7 +21,7 @@ class FrontendBehaviors
     public static function publicPrepend()
     {
         if (dcCore::app()->media) {
-            coreBehaviors::coreMediaConstruct(dcCore::app()->media);
+            CoreBehaviors::coreMediaConstruct(dcCore::app()->media);
         }
     }
 }

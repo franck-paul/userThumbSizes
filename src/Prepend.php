@@ -32,7 +32,7 @@ class Prepend extends dcNsProcess
             return false;
         }
 
-        dcCore::app()->addBehaviors(['coreMediaConstruct' => [coreBehaviors::class, 'coreMediaConstruct']]);
+        dcCore::app()->addBehaviors(['coreMediaConstruct' => [CoreBehaviors::class, 'coreMediaConstruct']]);
 
         return true;
     }
