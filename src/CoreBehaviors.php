@@ -22,7 +22,7 @@ class CoreBehaviors
     {
         if (dcCore::app()->blog !== null) {
             $touch    = false;
-            $settings = dcCore::app()->blog->settings->get(My::id());
+            $settings = My::settings();
             if ($settings->active) {
                 if (is_array($settings->sizes)) {
                     // userThumbSizes active and some sizes to defined

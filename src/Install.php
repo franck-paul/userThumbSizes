@@ -32,7 +32,7 @@ class Install extends Process
         }
 
         try {
-            $settings = dcCore::app()->blog->settings->get(My::id());
+            $settings = My::settings();
 
             // Update from older versions
             $old_version = dcCore::app()->getVersion(My::id());

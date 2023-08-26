@@ -74,7 +74,7 @@ class Manage extends Process
                 }
 
                 # Everything's fine, save options
-                $settings = dcCore::app()->blog->settings->get(My::id());
+                $settings = My::settings();
                 $settings->put('active', $uts_active);
                 $settings->put('sizes', $uts_sizes, 'array');
 
@@ -99,7 +99,7 @@ class Manage extends Process
             return;
         }
 
-        Page::openModule(__('User defined thumbnails'));
+        Page::openModule(My::name());
 
         echo Page::breadcrumb(
             [
@@ -110,7 +110,7 @@ class Manage extends Process
         echo Notices::getNotices();
 
         // Form
-        $settings   = dcCore::app()->blog->settings->get(My::id());
+        $settings   = My::settings();
         $uts_active = (bool) $settings->active;
         $uts_sizes  = $settings->sizes;
         if (!is_array($uts_sizes)) {
@@ -212,7 +212,7 @@ class Manage extends Process
                 (new Para())->items([
                     (new Submit(['frmsubmit']))
                         ->value(__('Save')),
-                    dcCore::app()->formNonce(false),
+                    ... My::hiddenFields(),
                 ]),
             ])
         ->render();
