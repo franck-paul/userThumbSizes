@@ -20,7 +20,7 @@ class FrontendBehaviors
 {
     public static function publicPrepend()
     {
-        if (dcCore::app()->media) {
+        if (dcCore::app()->media) { // @phpstan-ignore-line
             CoreBehaviors::coreMediaConstruct(dcCore::app()->media);
         }
     }
