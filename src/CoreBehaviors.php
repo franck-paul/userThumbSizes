@@ -15,10 +15,16 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\userThumbSizes;
 
 use dcCore;
+use dcMedia;
 
 class CoreBehaviors
 {
-    public static function coreMediaConstruct($media)
+    /**
+     * @param      dcMedia  $media  The media
+     *
+     * @return     string
+     */
+    public static function coreMediaConstruct(dcMedia $media): string
     {
         if (dcCore::app()->blog !== null) {
             $touch    = false;
@@ -48,5 +54,7 @@ class CoreBehaviors
                 }
             }
         }
+
+        return '';
     }
 }

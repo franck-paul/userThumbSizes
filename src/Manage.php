@@ -32,13 +32,17 @@ use Exception;
 
 class Manage extends Process
 {
-    // Dotclear reserved thumbnails codes
-    // sq = square
-    // t = thumbnail
-    // s = small
-    // m = medium
-    // o = original
-    protected static $excluded_codes = ['sq', 't', 's', 'm', 'o'];
+    /**
+     * Dotclear reserved thumbnails codes
+     * sq = square
+     * t = thumbnail
+     * s = small
+     * m = medium
+     * o = original
+     *
+     * @var        array<string>
+     */
+    protected static array $excluded_codes = ['sq', 't', 's', 'm', 'o'];
 
     /**
      * Initializes the page.

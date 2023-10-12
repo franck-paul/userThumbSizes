@@ -18,10 +18,12 @@ use dcCore;
 
 class FrontendBehaviors
 {
-    public static function publicPrepend()
+    public static function publicPrepend(): string
     {
         if (dcCore::app()->media) { // @phpstan-ignore-line
-            CoreBehaviors::coreMediaConstruct(dcCore::app()->media);
+            CoreBehaviors::coreMediaConstruct(dcCore::app()->media);    // @phpstan-ignore-line | waiting for 2.28+ compliance
         }
+
+        return '';
     }
 }
