@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\userThumbSizes;
 
 use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Backend\Notices;
 use Dotclear\Core\Backend\Page;
 use Dotclear\Core\Process;
@@ -82,10 +83,10 @@ class Manage extends Process
                 $settings->put('active', $uts_active);
                 $settings->put('sizes', $uts_sizes, 'array');
 
-                dcCore::app()->blog->triggerBlog();
+                App::blog()->triggerBlog();
 
                 Notices::addSuccessNotice(__('Settings have been successfully updated.'));
-                dcCore::app()->admin->url->redirect('admin.plugin.' . My::id());
+                dcCore::app()->adminurl->redirect('admin.plugin.' . My::id());
             } catch (Exception $e) {
                 dcCore::app()->error->add($e->getMessage());
             }
@@ -107,8 +108,8 @@ class Manage extends Process
 
         echo Page::breadcrumb(
             [
-                Html::escapeHTML(dcCore::app()->blog->name) => '',
-                __('User defined thumbnails')               => '',
+                Html::escapeHTML(App::blog()->name()) => '',
+                __('User defined thumbnails')         => '',
             ]
         );
         echo Notices::getNotices();

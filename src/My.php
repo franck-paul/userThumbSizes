@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\userThumbSizes;
 
 use dcCore;
+use Dotclear\App;
 use Dotclear\Module\MyPlugin;
 
 /**
@@ -38,13 +39,13 @@ class My extends MyPlugin
                         dcCore::app()->auth::PERMISSION_USAGE,
                         dcCore::app()->auth::PERMISSION_CONTENT_ADMIN,
                         dcCore::app()->auth::PERMISSION_MEDIA_ADMIN,
-                    ]), dcCore::app()->blog->id),
+                    ]), App::blog()->id()),
 
             self::CONFIG => defined('DC_CONTEXT_ADMIN')
                     // Check specific permission
                     && dcCore::app()->blog && dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
                         dcCore::app()->auth::PERMISSION_ADMIN,  // Admin+
-                    ]), dcCore::app()->blog->id),
+                    ]), App::blog()->id()),
 
             self::MANAGE,
             self::MENU => defined('DC_CONTEXT_ADMIN')
@@ -52,7 +53,7 @@ class My extends MyPlugin
                     && dcCore::app()->blog && dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
                         dcCore::app()->auth::PERMISSION_MEDIA_ADMIN,
                         dcCore::app()->auth::PERMISSION_ADMIN,  // Admin+
-                    ]), dcCore::app()->blog->id),
+                    ]), App::blog()->id()),
 
             default => null
         };

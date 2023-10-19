@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Dotclear\Plugin\userThumbSizes;
 
 use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Process;
 use Exception;
 
@@ -38,9 +39,9 @@ class Install extends Process
             $old_version = dcCore::app()->getVersion(My::id());
             if (version_compare((string) $old_version, '2.2', '<')) {
                 // Rename settings namespace
-                if (dcCore::app()->blog->settings->exists('userthumbsizes')) {
-                    dcCore::app()->blog->settings->delNamespace(My::id());
-                    dcCore::app()->blog->settings->renNamespace('userthumbsizes', My::id());
+                if (App::blog()->settings()->exists('userthumbsizes')) {
+                    App::blog()->settings()->delNamespace(My::id());
+                    App::blog()->settings()->renNamespace('userthumbsizes', My::id());
                 }
             }
 
