@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\userThumbSizes;
 
-use dcCore;
 use Dotclear\App;
 use Dotclear\Module\MyPlugin;
 
@@ -33,26 +32,26 @@ class My extends MyPlugin
     public static function checkCustomContext(int $context): ?bool
     {
         return match ($context) {
-            self::BACKEND => defined('DC_CONTEXT_ADMIN')
+            self::BACKEND => !App::task()->checkContext('FRONTEND')
                     // Check specific permission
-                    && dcCore::app()->blog && dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
-                        dcCore::app()->auth::PERMISSION_USAGE,
-                        dcCore::app()->auth::PERMISSION_CONTENT_ADMIN,
-                        dcCore::app()->auth::PERMISSION_MEDIA_ADMIN,
+                    && App::blog()->isDefined() && App::auth()->check(App::auth()->makePermissions([
+                        App::auth()::PERMISSION_USAGE,
+                        App::auth()::PERMISSION_CONTENT_ADMIN,
+                        App::auth()::PERMISSION_MEDIA_ADMIN,
                     ]), App::blog()->id()),
 
-            self::CONFIG => defined('DC_CONTEXT_ADMIN')
+            self::CONFIG => !App::task()->checkContext('FRONTEND')
                     // Check specific permission
-                    && dcCore::app()->blog && dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
-                        dcCore::app()->auth::PERMISSION_ADMIN,  // Admin+
+                    && App::blog()->isDefined() && App::auth()->check(App::auth()->makePermissions([
+                        App::auth()::PERMISSION_ADMIN,  // Admin+
                     ]), App::blog()->id()),
 
             self::MANAGE,
-            self::MENU => defined('DC_CONTEXT_ADMIN')
+            self::MENU => !App::task()->checkContext('FRONTEND')
                     // Check specific permission
-                    && dcCore::app()->blog && dcCore::app()->auth->check(dcCore::app()->auth->makePermissions([
-                        dcCore::app()->auth::PERMISSION_MEDIA_ADMIN,
-                        dcCore::app()->auth::PERMISSION_ADMIN,  // Admin+
+                    && App::blog()->isDefined() && App::auth()->check(App::auth()->makePermissions([
+                        App::auth()::PERMISSION_MEDIA_ADMIN,
+                        App::auth()::PERMISSION_ADMIN,  // Admin+
                     ]), App::blog()->id()),
 
             default => null

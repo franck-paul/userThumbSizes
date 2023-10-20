@@ -14,15 +14,13 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\userThumbSizes;
 
-use dcCore;
+use Dotclear\App;
 
 class FrontendBehaviors
 {
     public static function publicPrepend(): string
     {
-        if (dcCore::app()->media) { // @phpstan-ignore-line
-            CoreBehaviors::coreMediaConstruct(dcCore::app()->media);    // @phpstan-ignore-line | waiting for 2.28+ compliance
-        }
+        CoreBehaviors::coreMediaConstruct(App::media());    // @phpstan-ignore-line - should be Media (as this class cope with thumb_sizes)
 
         return '';
     }

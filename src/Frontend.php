@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\userThumbSizes;
 
-use dcCore;
+use Dotclear\App;
 use Dotclear\Core\Process;
 
 class Frontend extends Process
@@ -30,7 +30,7 @@ class Frontend extends Process
             return false;
         }
 
-        dcCore::app()->addBehavior('publicPrependV2', FrontendBehaviors::publicPrepend(...));
+        App::behavior()->addBehavior('publicPrependV2', FrontendBehaviors::publicPrepend(...));
 
         return true;
     }

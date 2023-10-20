@@ -14,19 +14,19 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\userThumbSizes;
 
-use dcCore;
-use dcMedia;
+use Dotclear\App;
+use Dotclear\Core\Media;
 
 class CoreBehaviors
 {
     /**
-     * @param      dcMedia  $media  The media
+     * @param      Media  $media  The media
      *
      * @return     string
      */
-    public static function coreMediaConstruct(dcMedia $media): string
+    public static function coreMediaConstruct(Media $media): string
     {
-        if (dcCore::app()->blog !== null) {
+        if (App::blog()->isDefined()) {
             $touch    = false;
             $settings = My::settings();
             if ($settings->active) {
