@@ -14,7 +14,7 @@ $this->registerModule(
     'User defined thumbnails',
     'Add user defined thumbnails',
     'Franck Paul',
-    '4.0.1',
+    '4.1',
     [
         'requires'    => [['core', '2.28']],
         'permissions' => 'My',

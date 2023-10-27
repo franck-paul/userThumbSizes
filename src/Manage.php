@@ -65,7 +65,7 @@ class Manage extends Process
             try {
                 $uts_active = (bool) $_POST['uts_active'];
                 $uts_sizes  = [];
-                for ($i = 0; $i < (is_countable($_POST['uts_codes']) ? count($_POST['uts_codes']) : 0); $i++) {
+                for ($i = 0; $i < (is_countable($_POST['uts_codes']) ? count($_POST['uts_codes']) : 0); ++$i) {
                     $code = $_POST['uts_codes'][$i];
                     if (($code != '') && (!in_array($code, static::$excluded_codes))) {
                         $size  = isset($_POST['uts_sizes'][$i]) ? abs((int) $_POST['uts_sizes'][$i]) : 0;
@@ -122,7 +122,7 @@ class Manage extends Process
         }
 
         $modes_combo  = ['ratio' => '', 'crop' => 'crop'];
-        $code_pattern = '(?![' . implode('', array_filter(static::$excluded_codes, fn ($item) => strlen($item) <= 1)) . '])[a-z]';
+        $code_pattern = '(?![' . implode('', array_filter(static::$excluded_codes, static fn($item) => strlen($item) <= 1)) . '])[a-z]';
 
         // Prepare rows
         $rows = [];
@@ -153,6 +153,7 @@ class Manage extends Process
                 ]);
             }
         }
+
         // Empty row in order to add new thumbnail size
         $rows[] = (new Para(null, 'tr'))->items([
             (new Para(null, 'td'))->extra('scope="row"')->items([

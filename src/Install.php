@@ -36,23 +36,22 @@ class Install extends Process
 
             // Update from older versions
             $old_version = App::version()->getVersion(My::id());
-            if (version_compare((string) $old_version, '2.2', '<')) {
-                // Rename settings namespace
-                if (App::blog()->settings()->exists('userthumbsizes')) {
-                    App::blog()->settings()->delWorkspace(My::id());
-                    App::blog()->settings()->renWorkspace('userthumbsizes', My::id());
-                }
+            // Rename settings namespace
+            if (version_compare((string) $old_version, '2.2', '<') && App::blog()->settings()->exists('userthumbsizes')) {
+                App::blog()->settings()->delWorkspace(My::id());
+                App::blog()->settings()->renWorkspace('userthumbsizes', My::id());
             }
 
             // Chech if settings exist, create them if not
             if (!$settings->getGlobal('active')) {
                 $settings->put('active', false, 'boolean', 'Active', false, true);
             }
+
             if (!$settings->getGlobal('sizes')) {
                 $settings->put('sizes', [], 'array', 'Sizes', false, true);
             }
-        } catch (Exception $e) {
-            App::error()->add($e->getMessage());
+        } catch (Exception $exception) {
+            App::error()->add($exception->getMessage());
         }
 
         return true;
