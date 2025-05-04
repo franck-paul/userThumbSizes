@@ -138,7 +138,6 @@ class Manage extends Process
                 $rows[] = (new Tr())
                     ->items([
                         (new Td())
-                            ->scope('row')
                             ->items([
                                 (new Input(['uts_codes[]']))
                                 ->size(1)
@@ -171,7 +170,6 @@ class Manage extends Process
         $rows[] = (new Tr())
             ->items([
                 (new Td())
-                    ->scope('row')
                     ->items([
                         (new Input(['uts_codes[]']))
                         ->size(1)
