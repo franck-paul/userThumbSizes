@@ -27,7 +27,13 @@ use Dotclear\Helper\Html\Form\Number;
 use Dotclear\Helper\Html\Form\Para;
 use Dotclear\Helper\Html\Form\Select;
 use Dotclear\Helper\Html\Form\Submit;
+use Dotclear\Helper\Html\Form\Table;
+use Dotclear\Helper\Html\Form\Tbody;
+use Dotclear\Helper\Html\Form\Td;
 use Dotclear\Helper\Html\Form\Text;
+use Dotclear\Helper\Html\Form\Th;
+use Dotclear\Helper\Html\Form\Thead;
+use Dotclear\Helper\Html\Form\Tr;
 use Dotclear\Helper\Html\Html;
 use Exception;
 
@@ -129,53 +135,65 @@ class Manage extends Process
         $rows = [];
         foreach ($uts_sizes as $code => $size) {
             if (is_array($size)) {
-                $rows[] = (new Para(null, 'tr'))->items([
-                    (new Para(null, 'td'))->extra('scope="row"')->items([
-                        (new Input(['uts_codes[]']))
-                        ->size(1)
-                        ->maxlength(1)
-                        ->value($code)
-                        ->pattern($code_pattern),
-                    ]),
-                    (new Para(null, 'td'))->items([
-                        (new Number(['uts_sizes[]'], 0, 9_999, (int) $size[0])),
-                    ]),
-                    (new Para(null, 'td'))->items([
-                        (new Select(['uts_modes[]']))
-                            ->items($modes_combo)
-                            ->default($size[2] ?? ''),
-                    ]),
-                    (new Para(null, 'td'))->items([
-                        (new Input(['uts_labels[]']))
-                        ->size(30)
-                        ->maxlength(255)
-                        ->value($size[1]),
-                    ]),
-                ]);
+                $rows[] = (new Tr())
+                    ->items([
+                        (new Td())
+                            ->scope('row')
+                            ->items([
+                                (new Input(['uts_codes[]']))
+                                ->size(1)
+                                ->maxlength(1)
+                                ->value($code)
+                                ->pattern($code_pattern),
+                            ]),
+                        (new Td())
+                            ->items([
+                                (new Number(['uts_sizes[]'], 0, 9_999, (int) $size[0])),
+                            ]),
+                        (new Td())
+                            ->items([
+                                (new Select(['uts_modes[]']))
+                                    ->items($modes_combo)
+                                    ->default($size[2] ?? ''),
+                            ]),
+                        (new Td())
+                            ->items([
+                                (new Input(['uts_labels[]']))
+                                ->size(30)
+                                ->maxlength(255)
+                                ->value($size[1]),
+                            ]),
+                    ]);
             }
         }
 
         // Empty row in order to add new thumbnail size
-        $rows[] = (new Para(null, 'tr'))->items([
-            (new Para(null, 'td'))->extra('scope="row"')->items([
-                (new Input(['uts_codes[]']))
-                ->size(1)
-                ->maxlength(1)
-                ->pattern($code_pattern),
-            ]),
-            (new Para(null, 'td'))->items([
-                (new Number(['uts_sizes[]'], 0, 9_999)),
-            ]),
-            (new Para(null, 'td'))->items([
-                (new Select(['uts_modes[]']))
-                    ->items($modes_combo),
-            ]),
-            (new Para(null, 'td'))->items([
-                (new Input(['uts_labels[]']))
-                ->size(30)
-                ->maxlength(255),
-            ]),
-        ]);
+        $rows[] = (new Tr())
+            ->items([
+                (new Td())
+                    ->scope('row')
+                    ->items([
+                        (new Input(['uts_codes[]']))
+                        ->size(1)
+                        ->maxlength(1)
+                        ->pattern($code_pattern),
+                    ]),
+                (new Td())
+                    ->items([
+                        (new Number(['uts_sizes[]'], 0, 9_999)),
+                    ]),
+                (new Td())
+                    ->items([
+                        (new Select(['uts_modes[]']))
+                            ->items($modes_combo),
+                    ]),
+                (new Td())
+                    ->items([
+                        (new Input(['uts_labels[]']))
+                        ->size(30)
+                        ->maxlength(255),
+                    ]),
+            ]);
 
         echo
         (new Form('uts_form'))
@@ -189,21 +207,33 @@ class Manage extends Process
                         ->label((new Label(__('Activate user defined thumbnails for this blog'), Label::INSIDE_TEXT_AFTER))),
                 ]),
                 // Table
-                (new Para(null, 'table'))->items([
-                    // Caption
-                    (new Text('caption', __('Thumbnails sizes')))->class('as_h3'),
-                    // Head
-                    (new Para(null, 'thead'))->items([
-                        (new Para(null, 'tr'))->items([
-                            (new Text('th', __('Code')))->extra('scope="col"'),
-                            (new Text('th', __('Size in pixels')))->extra('scope="col"'),
-                            (new Text('th', __('Mode')))->extra('scope="col"'),
-                            (new Text('th', __('Label')))->extra('scope="col"'),
-                        ]),
+                (new Table())
+                    ->items([
+                        // Caption
+                        (new Text('caption', __('Thumbnails sizes')))->class('as_h3'),
+                        // Head
+                        (new Thead())
+                            ->items([
+                                (new Tr())
+                                    ->items([
+                                        (new Th())
+                                            ->text(__('Code'))
+                                            ->scope('col'),
+                                        (new Th())
+                                            ->text(__('Size in pixels'))
+                                            ->scope('col'),
+                                        (new Th())
+                                            ->text(__('Mode'))
+                                            ->scope('col'),
+                                        (new Th())
+                                            ->text(__('Label'))
+                                            ->scope('col'),
+                                    ]),
+                            ]),
+                        // Body
+                        (new Tbody())
+                            ->items($rows),
                     ]),
-                    // Body
-                    (new Para(null, 'tbody'))->items($rows),
-                ]),
                 // Info
                 (new Para())->class('form-note')->items([
                     (new Text(null, __('Clear any field in row to delete this row'))),

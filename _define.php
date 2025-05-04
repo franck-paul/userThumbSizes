@@ -25,5 +25,6 @@ $this->registerModule(
         'details'    => 'https://open-time.net/?q=userThumbSizes',
         'support'    => 'https://github.com/franck-paul/userThumbSizes',
         'repository' => 'https://raw.githubusercontent.com/franck-paul/userThumbSizes/main/dcstore.xml',
+        'license'    => 'gpl2',
     ]
 );
