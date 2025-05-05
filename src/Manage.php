@@ -19,6 +19,7 @@ use Dotclear\App;
 use Dotclear\Core\Backend\Notices;
 use Dotclear\Core\Backend\Page;
 use Dotclear\Core\Process;
+use Dotclear\Helper\Html\Form\Caption;
 use Dotclear\Helper\Html\Form\Checkbox;
 use Dotclear\Helper\Html\Form\Form;
 use Dotclear\Helper\Html\Form\Input;
@@ -206,9 +207,8 @@ class Manage extends Process
                 ]),
                 // Table
                 (new Table())
+                    ->caption((new Caption(__('Thumbnails sizes')))->class('as_h3'))
                     ->items([
-                        // Caption
-                        (new Text('caption', __('Thumbnails sizes')))->class('as_h3'),
                         // Head
                         (new Thead())
                             ->items([
