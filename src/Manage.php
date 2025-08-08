@@ -130,7 +130,7 @@ class Manage extends Process
         }
 
         $modes_combo  = ['ratio' => '', 'crop' => 'crop'];
-        $code_pattern = '(?![' . implode('', array_filter(static::$excluded_codes, static fn ($item): bool => strlen($item) <= 1)) . '])[a-z]';
+        $code_pattern = '(?![' . implode('', array_filter(static::$excluded_codes, static fn (string $item): bool => strlen($item) <= 1)) . '])[a-z]';
 
         // Prepare rows
         $rows = [];
