@@ -71,15 +71,37 @@ class Manage
 
         if (!empty($_POST['uts_codes'])) {
             try {
-                $uts_active = (bool) $_POST['uts_active'];
-                $uts_sizes  = [];
-                for ($i = 0; $i < (is_countable($_POST['uts_codes']) ? count($_POST['uts_codes']) : 0); ++$i) {
-                    $code = $_POST['uts_codes'][$i];
-                    if (($code != '') && (!in_array($code, static::$excluded_codes))) {
-                        $size  = isset($_POST['uts_sizes'][$i]) ? abs((int) $_POST['uts_sizes'][$i]) : 0;
-                        $label = $_POST['uts_labels'][$i] ?? '';
-                        $mode  = $_POST['uts_modes'][$i]  ?? 'ratio';
-                        if (($size > 0) && ($label != '')) {
+                $active = (bool) $_POST['uts_active'];
+
+                /**
+                 * @var array<array-key, string>
+                 */
+                $codes = is_array($codes = $_POST['uts_codes']) ? $codes : [];
+
+                /**
+                 * @var array<array-key, string>
+                 */
+                $sizes = is_array($sizes = $_POST['uts_sizes']) ? $sizes : [];
+
+                /**
+                 * @var array<array-key, string>
+                 */
+                $labels = is_array($labels = $_POST['uts_labels']) ? $labels : [];
+
+                /**
+                 * @var array<array-key, string>
+                 */
+                $modes = is_array($modes = $_POST['uts_modes']) ? $modes : [];
+
+                $uts_sizes = [];
+                $counter   = count($codes);
+                for ($i = 0; $i < $counter; ++$i) {
+                    $code = $codes[$i];
+                    if (($code !== '') && (!in_array($code, static::$excluded_codes))) {
+                        $size  = is_numeric($sizes[$i]) ? (int) $sizes[$i] : 0;
+                        $label = $labels[$i] ?? '';
+                        $mode  = $modes[$i]  ?? 'ratio';
+                        if (($size > 0) && ($label !== '')) {
                             $uts_sizes[$code] = [$size, $label, $mode];
                         }
                     }
@@ -87,7 +109,7 @@ class Manage
 
                 # Everything's fine, save options
                 $settings = My::settings();
-                $settings->put('active', $uts_active);
+                $settings->put('active', $active);
                 $settings->put('sizes', $uts_sizes, 'array');
 
                 App::blog()->triggerBlog();
@@ -122,49 +144,55 @@ class Manage
         echo App::backend()->notices()->getNotices();
 
         // Form
-        $settings   = My::settings();
-        $uts_active = (bool) $settings->active;
-        $uts_sizes  = $settings->sizes;
-        if (!is_array($uts_sizes)) {
-            $uts_sizes = [];
-        }
+        $settings = My::settings();
+        $active   = (bool) $settings->active;
+
+        /**
+         * Custom sizes:
+         *     key = size code
+         *     data =
+         *         0 : largest size in pixels
+         *         1 : label
+         *         2 : mode
+         *
+         * @var array<string, array{0:int, 1:string, 2?:string}>
+         */
+        $sizes = is_array($sizes = $settings->sizes) ? $sizes : [];
 
         $modes_combo  = ['ratio' => '', 'crop' => 'crop'];
         $code_pattern = '(?![' . implode('', array_filter(static::$excluded_codes, static fn (string $item): bool => strlen($item) <= 1)) . '])[a-z]';
 
         // Prepare rows
         $rows = [];
-        foreach ($uts_sizes as $code => $size) {
-            if (is_array($size)) {
-                $rows[] = (new Tr())
-                    ->items([
-                        (new Td())
-                            ->items([
-                                (new Input(['uts_codes[]']))
-                                ->size(1)
-                                ->maxlength(1)
-                                ->value($code)
-                                ->pattern($code_pattern),
-                            ]),
-                        (new Td())
-                            ->items([
-                                (new Number(['uts_sizes[]'], 0, 9_999, (int) $size[0])),
-                            ]),
-                        (new Td())
-                            ->items([
-                                (new Select(['uts_modes[]']))
-                                    ->items($modes_combo)
-                                    ->default($size[2] ?? ''),
-                            ]),
-                        (new Td())
-                            ->items([
-                                (new Input(['uts_labels[]']))
-                                ->size(30)
-                                ->maxlength(255)
-                                ->value($size[1]),
-                            ]),
-                    ]);
-            }
+        foreach ($sizes as $code => $size) {
+            $rows[] = (new Tr())
+                ->items([
+                    (new Td())
+                        ->items([
+                            (new Input(['uts_codes[]']))
+                            ->size(1)
+                            ->maxlength(1)
+                            ->value($code)
+                            ->pattern($code_pattern),
+                        ]),
+                    (new Td())
+                        ->items([
+                            (new Number(['uts_sizes[]'], 0, 9_999, (int) $size[0])),
+                        ]),
+                    (new Td())
+                        ->items([
+                            (new Select(['uts_modes[]']))
+                                ->items($modes_combo)
+                                ->default($size[2] ?? ''),
+                        ]),
+                    (new Td())
+                        ->items([
+                            (new Input(['uts_labels[]']))
+                            ->size(30)
+                            ->maxlength(255)
+                            ->value($size[1]),
+                        ]),
+                ]);
         }
 
         // Empty row in order to add new thumbnail size
@@ -201,7 +229,7 @@ class Manage
             ->fields([
                 // Activation
                 (new Para())->items([
-                    (new Checkbox('uts_active', $uts_active))
+                    (new Checkbox('uts_active', $active))
                         ->value(1)
                         ->label((new Label(__('Activate user defined thumbnails for this blog'), Label::INSIDE_TEXT_AFTER))),
                 ]),

@@ -45,20 +45,35 @@ class Prepend
             $settings = My::settings();
             if ($settings->active && is_array($settings->sizes)) {
                 // userThumbSizes active and some sizes to defined
+
+                /**
+                 * Thumb sizes:
+                 *     key = size code
+                 *     data =
+                 *         0 : largest size in pixels
+                 *         1 : mode
+                 *         2 : translated label
+                 *         3 : label
+                 *
+                 * @var array<string, array{0:int, 1:string, 2:string, 3:string}>
+                 */
                 $thumb_sizes = App::media()->getThumbSizes();
-                $sizes       = $settings->sizes;
+
+                /**
+                 * Custom sizes:
+                 *     key = size code
+                 *     data =
+                 *         0 : largest size in pixels
+                 *         1 : label
+                 *         2 : mode
+                 *
+                 * @var array<string, array{0:int, 1:string, 2?:string}>
+                 */
+                $sizes = $settings->sizes;
+
                 foreach ($sizes as $code => $size) {
                     if (!array_key_exists($code, $thumb_sizes)) {
-                        // $size:
-                        // [0] = largest size in pixels
-                        // [1] = label
-                        // [2] = mode
-                        $mode = isset($size[2]) && $size[2] != '' ? $size[2] : 'ratio';
-                        // $thumb_sizes[$code]:
-                        // [0] = largest size in pixels
-                        // [1] = mode
-                        // [2] = translated label
-                        // [3] = label
+                        $mode               = isset($size[2]) && $size[2] !== '' ? $size[2] : 'ratio';
                         $thumb_sizes[$code] = [$size[0], $mode, __($size[1]), $size[1]];
                         $touch              = true;
                     }
