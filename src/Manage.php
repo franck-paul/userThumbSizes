@@ -110,7 +110,7 @@ class Manage
                 # Everything's fine, save options
                 $settings = My::settings();
                 $settings->put('active', $active);
-                $settings->put('sizes', $uts_sizes, 'array');
+                $settings->put('sizes', $uts_sizes, App::blogWorkspace()::NS_ARRAY);
 
                 App::blog()->triggerBlog();
 
