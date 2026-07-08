@@ -43,7 +43,7 @@ class Prepend
         if (App::blog()->isDefined()) {
             $touch    = false;
             $settings = My::settings();
-            if ($settings->active && is_array($settings->sizes)) {
+            if ($settings->getBool('active') && is_array($settings->get('sizes'))) {
                 // userThumbSizes active and some sizes to defined
 
                 /**
@@ -69,7 +69,7 @@ class Prepend
                  *
                  * @var array<string, array{0:int, 1:string, 2?:string}>
                  */
-                $sizes = $settings->sizes;
+                $sizes = $settings->get('sizes');
 
                 foreach ($sizes as $code => $size) {
                     if (!array_key_exists($code, $thumb_sizes)) {

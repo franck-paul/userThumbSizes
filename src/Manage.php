@@ -145,7 +145,7 @@ class Manage
 
         // Form
         $settings = My::settings();
-        $active   = (bool) $settings->active;
+        $active   = $settings->getBool('active', false);
 
         /**
          * Custom sizes:
@@ -157,7 +157,7 @@ class Manage
          *
          * @var array<string, array{0:int, 1:string, 2?:string}>
          */
-        $sizes = is_array($sizes = $settings->sizes) ? $sizes : [];
+        $sizes = is_array($sizes = $settings->get('sizes')) ? $sizes : [];
 
         $modes_combo  = ['ratio' => '', 'crop' => 'crop'];
         $code_pattern = '(?![' . implode('', array_filter(static::$excluded_codes, static fn (string $item): bool => strlen($item) <= 1)) . '])[a-z]';
