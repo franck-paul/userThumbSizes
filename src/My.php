@@ -35,7 +35,8 @@ class My extends MyPlugin
         return match ($context) {
             self::BACKEND => !App::task()->checkContext('FRONTEND')
                     // Check specific permission
-                    && App::blog()->isDefined() && App::auth()->check(App::auth()->makePermissions([
+                    && App::blog()->isDefined()
+                    && App::auth()->check(App::auth()->makePermissions([
                         App::auth()::PERMISSION_USAGE,
                         App::auth()::PERMISSION_CONTENT_ADMIN,
                         App::auth()::PERMISSION_MEDIA_ADMIN,
@@ -43,14 +44,16 @@ class My extends MyPlugin
 
             self::CONFIG => !App::task()->checkContext('FRONTEND')
                     // Check specific permission
-                    && App::blog()->isDefined() && App::auth()->check(App::auth()->makePermissions([
+                    && App::blog()->isDefined()
+                    && App::auth()->check(App::auth()->makePermissions([
                         App::auth()::PERMISSION_ADMIN,  // Admin+
                     ]), App::blog()->id()),
 
             self::MANAGE,
             self::MENU => !App::task()->checkContext('FRONTEND')
                     // Check specific permission
-                    && App::blog()->isDefined() && App::auth()->check(App::auth()->makePermissions([
+                    && App::blog()->isDefined()
+                    && App::auth()->check(App::auth()->makePermissions([
                         App::auth()::PERMISSION_MEDIA_ADMIN,
                         App::auth()::PERMISSION_ADMIN,  // Admin+
                     ]), App::blog()->id()),
