@@ -15,9 +15,9 @@ $this->registerModule(
     'User defined thumbnails',
     'Add user defined thumbnails',
     'Franck Paul',
-    '5.2',
+    '6.0',
     [
-        'date'        => '2026-02-23T18:04:04+0100',
+        'date'        => '2026-08-03T10:15:34+0200',
         'requires'    => [['core', '2.39']],
         'permissions' => 'My',
         'type'        => 'plugin',
