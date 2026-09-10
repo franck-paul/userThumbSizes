@@ -21,6 +21,7 @@ use Dotclear\Helper\Html\Form\Checkbox;
 use Dotclear\Helper\Html\Form\Form;
 use Dotclear\Helper\Html\Form\Input;
 use Dotclear\Helper\Html\Form\Label;
+use Dotclear\Helper\Html\Form\Note;
 use Dotclear\Helper\Html\Form\Number;
 use Dotclear\Helper\Html\Form\Para;
 use Dotclear\Helper\Html\Form\Select;
@@ -28,7 +29,6 @@ use Dotclear\Helper\Html\Form\Submit;
 use Dotclear\Helper\Html\Form\Table;
 use Dotclear\Helper\Html\Form\Tbody;
 use Dotclear\Helper\Html\Form\Td;
-use Dotclear\Helper\Html\Form\Text;
 use Dotclear\Helper\Html\Form\Th;
 use Dotclear\Helper\Html\Form\Thead;
 use Dotclear\Helper\Html\Form\Tr;
@@ -261,15 +261,20 @@ class Manage
                             ->items($rows),
                     ]),
                 // Info
-                (new Para())->class('form-note')->items([
-                    (new Text(null, __('Clear any field in row to delete this row'))),
-                ]),
-                (new Para())->class('form-note')->items([
-                    (new Text(null, sprintf(__('Code must not be one of these: %s'), implode(', ', static::$excluded_codes)))),
-                ]),
-                (new Para())->class('form-note')->items([
-                    (new Text(null, __('Mode: <strong>ratio</strong> will preserve aspect, <strong>crop</strong> will produce square'))),
-                ]),
+                (new Note())
+                    ->class('form-note')
+                    ->text(__('Clear any field in row to delete this row')),
+                (new Note())
+                    ->class('form-note')
+                    ->text(
+                        sprintf(
+                            __('Code must not be one of these: %s'),
+                            implode(', ', array_map(fn (string $item): string => '<code>' . $item . '</code>', static::$excluded_codes))
+                        )
+                    ),
+                (new Note())
+                    ->class('form-note')
+                    ->text(__('Mode: <strong>ratio</strong> will preserve aspect, <strong>crop</strong> will produce square')),
                 // Submit
                 (new Para())->items([
                     (new Submit(['frmsubmit']))
