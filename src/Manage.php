@@ -177,7 +177,7 @@ class Manage
                         ]),
                     (new Td())
                         ->items([
-                            (new Number(['uts_sizes[]'], 0, 9_999, (int) $size[0])),
+                            (new Number(['uts_sizes[]'], 0, 9_999, $size[0])),
                         ]),
                     (new Td())
                         ->items([
