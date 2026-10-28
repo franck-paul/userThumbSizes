@@ -97,7 +97,7 @@ class Manage
                 $counter   = count($codes);
                 for ($i = 0; $i < $counter; ++$i) {
                     $code = $codes[$i];
-                    if (($code !== '') && (!in_array($code, static::$excluded_codes))) {
+                    if (($code !== '') && (!in_array($code, static::$excluded_codes, true))) {
                         $size  = is_numeric($sizes[$i]) ? (int) $sizes[$i] : 0;
                         $label = $labels[$i] ?? '';
                         $mode  = $modes[$i]  ?? 'ratio';
