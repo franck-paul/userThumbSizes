@@ -46,11 +46,11 @@ class Install
             }
 
             // Chech if settings exist, create them if not
-            if (!$settings->getGlobal('active')) {
+            if ($settings->getGlobal('active') === null) {
                 $settings->put('active', false, App::blogWorkspace()::NS_BOOL, 'Active', false, true);
             }
 
-            if (!$settings->getGlobal('sizes')) {
+            if ($settings->getGlobal('sizes') === null) {
                 $settings->put('sizes', [], App::blogWorkspace()::NS_ARRAY, 'Sizes', false, true);
             }
         } catch (Exception $exception) {

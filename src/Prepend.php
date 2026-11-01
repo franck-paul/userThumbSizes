@@ -43,7 +43,7 @@ class Prepend
         if (App::blog()->isDefined()) {
             $touch    = false;
             $settings = My::settings();
-            if ($settings->getBool('active') && is_array($settings->get('sizes'))) {
+            if ($settings->getBool('active', false) && is_array($settings->get('sizes'))) {
                 // userThumbSizes active and some sizes to defined
 
                 /**
